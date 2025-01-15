@@ -14,6 +14,9 @@ from dataclasses import dataclass
 from src.components.data_transformation import DataTransformation
 from src.components.data_transformation import DataTransformconfig
 
+from src.components.model_trainer import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
+
 ## In data ingestion there should be some inputs like where to save the train-dataortest-data 
 ## Those inputs are saved in another class 
 
@@ -59,5 +62,7 @@ if __name__=="__main__":
     train_data,test_data = obj.initiate_data_ingestion()
 
     data_transformation = DataTransformation()
-    data_transformation.initiate_data_transform(train_data,test_data)
-            
+    train_arr,test_arr,_ = data_transformation.initiate_data_transform(train_data,test_data)
+
+    modeltrainer=ModelTrainer()
+    print(modeltrainer.initiate_model_trainer(train_arr,test_arr))
